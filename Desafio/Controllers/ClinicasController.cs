@@ -55,7 +55,7 @@ namespace Desafio.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ClinicaID,NomeClinica,IDMedico")] Clinicas clinicas)
+        public ActionResult Create([Bind(Include = "ClinicaID,NomeClinica,Estrelas,NomeSecretaria,Endereco,IDMedico")] Clinicas clinicas)
         {
             if (ModelState.IsValid)
             {
@@ -96,7 +96,7 @@ namespace Desafio.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ClinicaID,NomeClinica,IDMedico")] Clinicas clinicas)
+        public ActionResult Edit([Bind(Include = "ClinicaID,NomeClinica,Estrelas,NomeSecretaria,Endereco,IDMedico")] Clinicas clinicas)
         {
             if (ModelState.IsValid)
             {

@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Adicionar", "Create")
 </p>
 <table class="table">
     <tr>
@@ -15,8 +15,15 @@
             @Html.DisplayNameFor(model => model.NomeClinica)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ClinicaID)
+            @Html.DisplayNameFor(model => model.Estrelas)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Endereco)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NomeSecretaria)
+        </th>
+
     </tr>
 
 @foreach (var item in Model) {
@@ -25,12 +32,19 @@
             @Html.DisplayFor(modelItem => item.NomeClinica)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ClinicaID)
+            @Html.DisplayFor(modelItem => item.Estrelas)
         </td>
         <td>
-           [ @Html.ActionLink("Editar", "Edit", new { id=item.ClinicaID }) ]
-           [ @Html.ActionLink("Detalhes", "Details", new { id=item.ClinicaID }) ]
-           [ @Html.ActionLink("Delete", "Delete", new { id=item.ClinicaID }) ]
+            @Html.DisplayFor(modelItem => item.Endereco)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NomeSecretaria)
+        </td>
+
+        <td>
+            [ @Html.ActionLink("Editar", "Edit", new { id = item.ClinicaID }) ]
+            [ @Html.ActionLink("Detalhes", "Details", new { id = item.ClinicaID }) ]
+            [ @Html.ActionLink("Delete", "Delete", new { id = item.ClinicaID }) ]
         </td>
     </tr>
 }

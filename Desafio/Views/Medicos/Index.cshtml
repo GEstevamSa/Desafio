@@ -7,7 +7,7 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Adicionar", "Create")
 </p>
 <table class="table">
     <tr>
@@ -18,8 +18,12 @@
             @Html.DisplayNameFor(model => model.Sobrenome)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.MedicoID)
+            @Html.DisplayNameFor(model => model.email)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CRM)
+        </th>
+       
     </tr>
 
 @foreach (var item in Model) {
@@ -31,7 +35,10 @@
             @Html.DisplayFor(modelItem => item.Sobrenome)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.MedicoID)
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CRM)
         </td>
         <td>
            [ @Html.ActionLink("Editar", "Edit", new { id=item.MedicoID }) ]
