@@ -20,6 +20,8 @@ namespace Desafio.Models
         public Medico medicos { get; set; }
 
         public string NomeClinica { get; set; }
+
+        [Range(0,5)]
         public int Estrelas { get; set; }
         public string NomeSecretaria { get; set; }
         public string Endereco { get; set; }

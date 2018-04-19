@@ -1,27 +1,37 @@
-﻿@model IEnumerable<Desafio.Models.Medico>
+﻿@model PagedList.IPagedList<Desafio.Models.Medico>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Medicos";
 }
 
-<h2>Index</h2>
+<h2>Medicos</h2>
 
 <p>
     @Html.ActionLink("Adicionar", "Create")
 </p>
+
+@using (Html.BeginForm("Index","Medico", FormMethod.Get))
+{
+    <p>
+        Procure por Nome: @Html.TextBox("procuraNome", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Procure" />
+    </p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Nome)
+            @Html.ActionLink("Nome", "Index", new {sortOrder = ViewBag.NameSortParm, currentFilter=ViewBag.CurrentFilter})
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Sobrenome)
+            Sobrenome@*@Html.DisplayNameFor(model => model.Sobrenome)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.email)
+           email @*@Html.DisplayNameFor(model => model.email)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.CRM)
+           CRM @*@Html.DisplayNameFor(model => model.CRM)*@
         </th>
        
     </tr>
@@ -49,3 +59,7 @@
 }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0: Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new {page, sortOrder = ViewBag.CurrentSort,currentFilter = ViewBag.CurrentFilter  }))

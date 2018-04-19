@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Desafio.Models;
+using PagedList;
 
 namespace Desafio.Controllers
 {
@@ -15,9 +16,41 @@ namespace Desafio.Controllers
         private contexto db = new contexto();
 
         // GET: Medicos
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder,string currentFilter, string procuraNome, int ? page)
         {
-            return View(db.Medicos.ToList());
+            ViewBag.CurrentSort = sortOrder;
+            ViewBag.NameSortParm = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+
+            if(procuraNome != null)
+            {
+                page = 1;
+            }
+            else
+            {
+                procuraNome = currentFilter;
+            }
+            ViewBag.CurrentFilter = procuraNome;
+
+            var med = from m in db.Medicos
+                      select m;
+            if (!String.IsNullOrEmpty(procuraNome))
+            {
+                med = med.Where(m => m.Nome.Contains(procuraNome)
+                || m.Sobrenome.Contains(procuraNome));
+            }
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    med = med.OrderByDescending(s => s.Nome);
+                    break;
+                default:
+                    med = med.OrderBy(s => s.Nome);
+                    break;
+            }
+            //return View(db.Medicos.ToList());
+            int pageSize = 5;
+            int pageNumber = (page ?? 1);
+            return View(med.ToPagedList(pageNumber,pageSize));
         }
 
         // GET: Medicos/Details/5
