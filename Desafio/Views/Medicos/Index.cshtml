@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Desafio.Models.Medico>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sobrenome)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.MedicoID)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sobrenome)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.MedicoID)
+        </td>
+        <td>
+           [ @Html.ActionLink("Editar", "Edit", new { id=item.MedicoID }) ]
+           [ @Html.ActionLink("Detalhes", "Details", new { id=item.MedicoID }) ]
+           [ @Html.ActionLink("Delete", "Delete", new { id=item.MedicoID }) ]
+        </td>
+    </tr>
+}
+
+</table>

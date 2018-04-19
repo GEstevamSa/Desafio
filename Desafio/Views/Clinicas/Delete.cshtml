@@ -1,0 +1,49 @@
+﻿@model Desafio.Models.Clinicas
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Voce tem certeza disso?</h3>
+<div>
+    <h4>Clinicas</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ClinicaID)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.ClinicaID)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.NomeClinica)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.NomeClinica)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.medicos.Nome)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.medicos.Nome)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.IDMedico)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.IDMedico)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            [@Html.ActionLink("Voltar para a Lista", "Index")]
+        </div>
+    }
+</div>

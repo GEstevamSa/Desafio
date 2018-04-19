@@ -1,0 +1,59 @@
+﻿@model Desafio.Models.Clinicas
+
+@{
+    ViewBag.Title = "Create";
+    var medicos = new List<SelectListItem>();
+
+    if(ViewBag.Medico != null)
+    {
+        medicos = (List<SelectListItem>)ViewBag.Medico;
+    }
+}
+
+<h2>Adicionar uma Clinica Nova</h2>
+
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+<div class="form-horizontal">
+    <h4>Clinicas</h4>
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(model => model.ClinicaID, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.ClinicaID, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.ClinicaID, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.NomeClinica, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.NomeClinica, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.NomeClinica, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.IDMedico, "Medico", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("IDMedico", medicos, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.IDMedico, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+}
+
+<div>
+   [ @Html.ActionLink("Voltar para a Lista", "Index")]
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
