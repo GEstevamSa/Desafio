@@ -1,52 +1,67 @@
-﻿@model IEnumerable<Desafio.Models.Clinicas>
+﻿@model PagedList.IPagedList<Desafio.Models.Clinicas>
+@using PagedList.Mvc;
+<link href="~/Content/PagedList.css" rel="stylesheet" type="text/css" />
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Clinicas";
 }
 
-<h2>Index</h2>
+<h2>Clinicas</h2>
 
 <p>
     @Html.ActionLink("Adicionar", "Create")
 </p>
+@using (Html.BeginForm("Index", "Clinicas", FormMethod.Get))
+{
+    <p>
+        Procure por Nome: @Html.TextBox("procuraClinica", ViewBag.CurrentFilter as string)
+        <input type="submit" value="Procure" />
+    </p>
+}
+
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.NomeClinica)
+            @Html.ActionLink("NomeClinica", "Index", new { sortOrder = ViewBag.NameSortParm, currentFilter = ViewBag.CurrentFilter })
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Estrelas)
+            Estrelas  @*@Html.DisplayNameFor(model => model.Estrelas)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Endereco)
+            Endereco @*@Html.DisplayNameFor(model => model.Endereco)*@
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NomeSecretaria)
+            NomeSecretaria @*@Html.DisplayNameFor(model => model.NomeSecretaria)*@
         </th>
 
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.NomeClinica)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Estrelas)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Endereco)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NomeSecretaria)
-        </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeClinica)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Estrelas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Endereco)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomeSecretaria)
+            </td>
 
-        <td>
-            [ @Html.ActionLink("Editar", "Edit", new { id = item.ClinicaID }) ]
-            [ @Html.ActionLink("Detalhes", "Details", new { id = item.ClinicaID }) ]
-            [ @Html.ActionLink("Delete", "Delete", new { id = item.ClinicaID }) ]
-        </td>
-    </tr>
-}
+            <td>
+                [ @Html.ActionLink("Editar", "Edit", new { id = item.ClinicaID }) ]
+                [ @Html.ActionLink("Detalhes", "Details", new { id = item.ClinicaID }) ]
+                [ @Html.ActionLink("Delete", "Delete", new { id = item.ClinicaID }) ]
+            </td>
+        </tr>
+    }
 
 </table>
+<br />
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }))
